@@ -115,7 +115,7 @@ model User {
 ```
 ## Todo
 ```bash
-prismaCopymodel Todo {
+model Todo {
   id        Int      @id @default(autoincrement())
   content   String
   completed Boolean  @default(false)
