@@ -9,12 +9,12 @@ A full-stack todo application built with React, Node.js, Express, and Prisma ORM
 - Create, read, update, and delete todos
 - Protected routes
 - Database persistence with PostgreSQL
-- Type-safe with TypeScript (Frontend)
+- React with javascript (Frontend)
 
 ## Tech Stack
 
 ### Frontend
-- React with TypeScript
+- React with javascript
 - React Router DOM for routing
 - Axios for API requests
 - Vite as build tool
@@ -26,30 +26,6 @@ A full-stack todo application built with React, Node.js, Express, and Prisma ORM
 - PostgreSQL
 - JSON Web Tokens (JWT)
 - bcryptjs for password hashing
-
-## Project Structure
-project/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Login.tsx
-│   │   │   ├── Signup.tsx
-│   │   │   └── TodoList.tsx
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   └── vite.config.ts
-│
-└── backend/
-├── routes/
-│   ├── auth.js
-│   └── todos.js
-├── middleware/
-│   └── auth.js
-├── prisma/
-│   └── schema.prisma
-├── server.js
-└── package.json
 
 ## Getting Started
 
@@ -105,4 +81,45 @@ Start the frontend development server:
 ```bash
 cd frontend
 npm run dev
+```
+
+
+The application should now be running at:
+
+Frontend: http://localhost:5173
+Backend: http://localhost:3000
+
+API Endpoints
+Authentication
+
+POST /api/signup - Register a new user
+POST /api/login - Login user
+
+Todos (Protected Routes)
+
+GET /api/todos - Get all todos
+POST /api/todos - Create a new todo
+PUT /api/todos/:id - Update a todo
+DELETE /api/todos/:id - Delete a todo
+
+
+### Database Schema
+## User
+```bash
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  todos    Todo[]
+}
+```
+## Todo
+```bash
+prismaCopymodel Todo {
+  id        Int      @id @default(autoincrement())
+  content   String
+  completed Boolean  @default(false)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
 ```
